@@ -1,40 +1,44 @@
-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
 section > div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 30%;
-    min-height: 40vh;
-    background: radial-gradient(circle at center, var(--primary-color) 50%, black 100%);
-    border-radius: 10px;
-    padding: 20px;
-    border: 1px solid gray;
-    gap: 10px;
+    width: 350px;
+    min-height: 250px;
+    background: #B71C1C;
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    animation: slideIn 1s ease-out forwards;
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    color: #fff;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 15px;
 }
+
 a {
     display: block;
-    width: 40%;
+    width: 100%;
+    text-align: center;
     padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background: var(--secondary-color);
-    color: white;
+    margin: 5px 0;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
     font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease-in-out;
+    color: #fff;
+    background: #444444;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 a:hover {
-    background: var(--tertiary-color);
-}   
+    background: #666666;
+    transform: scale(1.05);
+}

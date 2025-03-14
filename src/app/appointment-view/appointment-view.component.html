@@ -1,15 +1,25 @@
 <section>
     <h2>Lista de Citas</h2>
-    <div *ngIf="appointments && appointments.length > 0; else noAppointments">
-        <div *ngFor="let appointment of appointments" class="appointment-card">
-            <p>Taller ID: {{ appointment.workshopId }}</p>
-            <p>Fecha y Hora: {{ appointment.date }}</p>
-            <p>Técnico ID: {{ appointment.technicianId }}</p>
-            <p>Cliente ID: {{ appointment.clientId }}</p>
+
+    <div *ngIf="paginatedAppointments.length > 0; else noAppointments" class="appointment-card">
+        <div *ngFor="let appointment of paginatedAppointments" class="appointment-card2">
+            <p><strong>Taller ID:</strong> {{ appointment.workshopId }}</p>
+            <p><strong>Fecha y Hora:</strong> {{ appointment.date }}</p>
+            <p><strong>Técnico ID:</strong> {{ appointment.technicianId }}</p>
+            <p><strong>Cliente ID:</strong> {{ appointment.clientId }}</p>
         </div>
     </div>
+
     <ng-template #noAppointments>
         <p>No hay citas disponibles.</p>
     </ng-template>
+
+    <!-- Controles de paginación -->
+    <div class="pagination">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">⏮ Anterior</button>
+        <span>Página {{ currentPage }} de {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente ⏭</button>
+    </div>
+
     <a routerLink="/appointments">Volver</a>
 </section>

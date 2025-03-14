@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { AppointmentCreateComponent } from './appointment-create/appointment-create.component';
-import { AppointmentViewComponent } from './appointment-view/appointment-view.component'; // Standalone
+import { AppointmentViewComponent } from './appointment-view/appointment-view.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [

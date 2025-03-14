@@ -8,22 +8,22 @@ import { AppComponent } from './app.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { AppointmentCreateComponent } from './appointment-create/appointment-create.component';
 import { AuthGuard } from './guards/auth.guard';
-import { LoginComponent } from './login/login.component'; // Standalone
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppointmentsComponent,
     AppointmentCreateComponent
-    // No se declara AppointmentViewComponent si es standalone
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    LoginComponent // Componente standalone
+    LoginComponent 
   ],
   providers: [
     AuthGuard,
@@ -32,4 +32,4 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

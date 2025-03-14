@@ -8,59 +8,40 @@ import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+// Obtiene la ruta del directorio donde está ubicado este archivo
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
+// Define la ruta de la carpeta que contiene los archivos estáticos del navegador
 const browserDistFolder = resolve(serverDistFolder, '../browser');
 
-const app = express();
-const angularApp = new AngularNodeAppEngine();
+const app = express(); // Crea una instancia de la aplicación Express
+const angularApp = new AngularNodeAppEngine(); // Inicializa el motor de renderizado para SSR (Server-Side Rendering)
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/**', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
-
-/**
- * Serve static files from /browser
- */
+// Configura Express para servir archivos estáticos desde la carpeta del frontend compilado
 app.use(
   express.static(browserDistFolder, {
-    maxAge: '1y',
-    index: false,
-    redirect: false,
+    maxAge: '1y', // Configura la caché del navegador para que almacene archivos por un año
+    index: false, // Evita la carga automática de index.html
+    redirect: false, // No redirecciona automáticamente a archivos index
   }),
 );
 
-/**
- * Handle all other requests by rendering the Angular application.
- */
+// Middleware para manejar todas las rutas con Angular SSR
 app.use('/**', (req, res, next) => {
   angularApp
-    .handle(req)
+    .handle(req) // Procesa la solicitud con Angular
     .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
+      response ? writeResponseToNodeResponse(response, res) : next(), // Si hay una respuesta, la escribe en la respuesta de Express
     )
-    .catch(next);
+    .catch(next); // Captura errores y los pasa al siguiente middleware
 });
 
-/**
- * Start the server if this module is the main entry point.
- * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
- */
+// Verifica si este módulo es el principal y no está siendo importado
 if (isMainModule(import.meta.url)) {
-  const port = process.env['PORT'] || 4000;
+  const port = process.env['PORT'] || 4000; // Usa el puerto de entorno o 4000 por defecto
   app.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }
 
-/**
- * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
- */
+// Exporta el manejador de solicitudes para que pueda ser usado en otro lugar
 export const reqHandler = createNodeRequestHandler(app);
