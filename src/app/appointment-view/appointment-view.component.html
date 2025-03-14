@@ -1,0 +1,15 @@
+<section>
+    <h2>Lista de Citas</h2>
+    <div *ngIf="appointments && appointments.length > 0; else noAppointments">
+        <div *ngFor="let appointment of appointments" class="appointment-card">
+            <p>Taller ID: {{ appointment.workshopId }}</p>
+            <p>Fecha y Hora: {{ appointment.date }}</p>
+            <p>Técnico ID: {{ appointment.technicianId }}</p>
+            <p>Cliente ID: {{ appointment.clientId }}</p>
+        </div>
+    </div>
+    <ng-template #noAppointments>
+        <p>No hay citas disponibles.</p>
+    </ng-template>
+    <a routerLink="/appointments">Volver</a>
+</section>

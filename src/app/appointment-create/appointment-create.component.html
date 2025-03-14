@@ -1,0 +1,34 @@
+<section>
+    <h2>Crear Cita</h2>
+    <form (ngSubmit)="createAppointment()">
+        <label>Taller:</label>
+        <input type="text" [(ngModel)]="newAppointment.workshop" name="workshop" required>
+
+        <label>Fecha:</label>
+        <input type="date" [(ngModel)]="newAppointment.date" name="date" required>
+        <label>Hora:</label>
+        <input type="time" [(ngModel)]="newAppointment.time" name="time" required list="valid-times">
+        
+        <datalist id="valid-times">
+            <option value="08:00"></option>
+            <option value="09:00"></option>
+            <option value="10:00"></option>
+            <option value="11:00"></option>
+            <option value="12:00"></option>
+            <option value="14:00"></option>
+            <option value="15:00"></option>
+            <option value="16:00"></option>
+            <option value="17:00"></option>
+        </datalist>
+
+        <label>Técnico:</label>
+        <input type="text" [(ngModel)]="newAppointment.technical" name="technical" required>
+
+        <label>Usuario:</label>
+        <input type="text" [(ngModel)]="newAppointment.user" name="user" required>
+
+        <button type="submit">Guardar Cita</button>
+    </form>
+
+    <a routerLink="/appointmentview">Volver</a>
+</section>
